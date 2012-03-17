@@ -1,25 +1,54 @@
 <?php
-###################################################
-##-= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =- ##
-## ----------------------------------------------##
-## Project starters: Akakori, TTMMTT and other   ##
-## Travian-Core project owner: Songer		     ##
-## Project devoloper's: Songer				     ##
-## Editors: Dzoki and other...				     ##
-## Licence: Travian-Core					     ##
-## Release date: 2012.03.17 15:40			     ##
-## All right reserverd						     ##
-## ENJOY THE TRAVIAN!!						     ##
-###################################################
-
-if(isset($_POST)){ 
-	if(!isset($_POST['ft'])){
-	$_POST = @array_map('mysql_real_escape_string', $_POST);
-	$_POST = array_map('htmlspecialchars', $_POST);
-	}
+function mres($data){
+if(function_exists("mysql_real_escape_string")){
+$data = mysql_real_escape_string(trim($data));
+}else{
+$data = mysql_escape_string(trim($data));
 }
-$_GET = array_map('mysql_real_escape_string', $_GET);
-$_GET = array_map('htmlspecialchars', $_GET);
-$_COOKIE = array_map('mysql_real_escape_string', $_COOKIE);
-$_COOKIE = array_map('htmlspecialchars', $_COOKIE);
+$data = htmlspecialchars($data);
+$data = filter_var($data,FILTER_SANITIZE_STRING);
+$data = strip_tags($data);
+return $data;
+}
+
+# GETai
+if(isset($_GET)){
+foreach($_GET as $key=>$value)
+{
+$_GET[$key]=mres($value);
+}
+}
+
+# POSTAI
+if(isset($_POST)){
+foreach($_POST as $key=>$value)
+{
+$_POST[$key]=mres($value);
+}
+}
+
+# Sesijos
+if(isset($_SESSION)){
+foreach($_SESSION as $key=>$value){
+$_SESSION[$key]=mres($value);
+}
+}
+# Cookie..
+if(isset($_COOKIE)){
+foreach($_COOKIE as $key=>$value){
+$_COOKIE[$key]=mres($value);
+}
+}
+
+if(isset($_REQUEST)){
+foreach($_REQUEST as $key=>$value){
+$_REQUEST[$key]=mres($value);
+}
+}
+
+if(isset($_SERVER)){
+foreach($_SERVER as $key=>$value){
+$_SERVER[$key]=mres($value);
+}
+}
 ?>

@@ -146,9 +146,6 @@ class Automation {
         if(!file_exists("GameEngine/Prevention/settlers.txt") or time()-filemtime("GameEngine/Prevention/settlers.txt")>400) {
             $this->sendSettlersComplete();
         }
-         if(!file_exists("GameEngine/Prevention/starvation.txt") or time()-filemtime("GameEngine/Prevention/starvation.txt")>600) {
-	        $this->starvation();
-		}
         if(!file_exists("GameEngine/Prevention/celebration.txt") or time()-filemtime("GameEngine/Prevention/celebration.txt")>=60) {
             $this->celebrationComplete();
         }

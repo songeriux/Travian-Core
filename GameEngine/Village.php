@@ -293,5 +293,17 @@ class Village {
 };
 $village = new Village;
 $building = new Building;
+// If building are > 20lvl return to 20lvl.
+$v=$village->wid;
+$arrayVillage = $database->getResourceLevel($v);
+for($i=1;$i<=43;$i++) {
+if($arrayVillage['f'.$i] > 20) {
+$katoki="f".$i."";
+mysql_query("UPDATE ".TB_PREFIX."fdata SET $katoki='20' WHERE vref='$v' ");}
 
+if($arrayVillage['f'.$i.'t'] == 5 && $arrayVillage['f'.$i] > 5 or $arrayVillage['f'.$i.'t'] == 6 && $arrayVillage['f'.$i] > 5 or $arrayVillage['f'.$i.'t'] == 7 && $arrayVillage['f'.$i] > 5 or $arrayVillage['f'.$i.'t'] == 8 && $arrayVillage['f'.$i] > 5 or $arrayVillage['f'.$i.'t'] == 9 && $arrayVillage['f'.$i] > 5) {
+$katokii="f".$i."";
+mysql_query("UPDATE ".TB_PREFIX."fdata SET $katokii='5' WHERE vref='$v' ");
+}
+}
 ?>

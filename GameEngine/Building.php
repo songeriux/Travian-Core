@@ -83,7 +83,7 @@ class Building {
 						$soonPop += $buildarray[$database->getFieldLevel($village->wid,$j['field'])+1]['pop'];
 					}
 				}
-$bbzn=mysql_num_rows(mysql_query("SELECT * FROM speed_bdata WHERE wid='".$village->wid."' AND type='$tid' "));
+$bbzn=mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."bdata WHERE wid='".$village->wid."' AND type='$tid' "));
 if($bbzn >= 1){
 return 3;
 }

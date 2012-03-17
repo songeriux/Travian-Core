@@ -152,9 +152,6 @@ class Automation {
         if(!file_exists("GameEngine/Prevention/demolition.txt") or time()-filemtime("GameEngine/Prevention/demolition.txt")>60) {
             $this->demolitionComplete();
         }
-        if(!file_exists("GameEngine/Prevention/healhero.txt") or time()-filemtime("GameEngine/Prevention/healhero.txt")>600) {
-            $this->healHero();
-        }
     }
 
    private function getfieldDistance($coorx1, $coory1, $coorx2, $coory2) {

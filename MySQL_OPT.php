@@ -7,3 +7,4 @@ foreach($tbl as $db){
 mysql_query("OPTIMIZE TABLE $db") or die(mysql_error());
 }
 }
+?>

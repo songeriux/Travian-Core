@@ -11,7 +11,6 @@
 ## All right reserverd						     ##
 ## ENJOY THE TRAVIAN!!						     ##
 ###################################################
-
 class Units {
 	public $sending,$recieving,$return = array();
 
@@ -140,6 +139,13 @@ class Units {
 				$userAccess = $database->getUserField($villageOwner,'access',0);
 					if($userAccess == '0'){
 								$form->addError("error","Player is Banned. You can't attack him");
+								//break;
+					}
+				//check if admin:
+				$villageOwner = $database->getVillageField($id,'owner');
+				$userAccess = $database->getUserField($villageOwner,'access',0);
+					if($userAccess == '9'){
+								$form->addError("error","Player is Admin. You can't attack him");
 								//break;
 					}
 					

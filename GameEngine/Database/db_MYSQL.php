@@ -1,15 +1,5 @@
 <?php
 
-/** --------------------------------------------------- **\
- * | ********* DO NOT REMOVE THIS COPYRIGHT NOTICE ********* |
- * +---------------------------------------------------------+
- * | Credits:     All the developers including the leaders:  |
- * |              Advocaite & Dzoki & Donnchadh              |
- * |                                                         |
- * | Copyright:   TravianX Project All rights reserved       |
- * \** --------------------------------------------------- **/
-
-
         class MYSQL_DB {
 
         	var $connection;
@@ -2446,10 +2436,63 @@
 		$array = $this->mysql_fetch_all($result);
 		return $array;
 		}
-
-
-        }
-        ;
+## Hero Claim artifact by advocaite
+public function canClaimArtifact ($vref,$type)
+            {
+              $DefenderFields = $this->getResourceLevel($vref);
+                for($i=19;$i<=38;$i++) {
+                    if($AttackerFields['f'.$i.'t'] == 27) { 
+                        $defcanclaim = FALSE;
+                        $defTresuaryLevel = $AttackerFields['f'.$i]; 
+                    } else
+                    {
+                        $defcanclaim = TRUE;  
+                    }
+                } 
+                $AttackerFields = $this->getResourceLevel($vref);
+                for($i=19;$i<=38;$i++) {
+                    if($AttackerFields['f'.$i.'t'] == 27) {
+                     $attTresuaryLevel = $AttackerFields['f'.$i]; 
+                     if ($attTresuaryLevel >= 10){
+                         $villageartifact = TRUE;
+                     }else{
+                         $villageartifact = FALSE;
+                     }
+                     if ($attTresuaryLevel == 20){
+                         $accountartifact = TRUE;
+                     }else{
+                         $accountartifact = FALSE;
+                     }
+                    }
+                }
+                
+                if ($type == 1)
+                {
+                if ($defcanclaim == TRUE && $villageartifact == TRUE)    
+                {
+                     return TRUE;
+                }
+                
+                }else if($type == 2)
+                {
+                 if ($defcanclaim == TRUE && $accountartifact == TRUE)    
+                {
+                     return TRUE;
+                }   
+                }else if($type == 3)
+                {
+                 if ($defcanclaim == TRUE && $accountartifact == TRUE)    
+                {
+                     return TRUE;
+                }   
+                }else
+                {
+                    return FALSE;
+                } 
+                
+               
+            }
+        };
 
         $database = new MYSQL_DB;
 

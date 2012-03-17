@@ -1641,29 +1641,41 @@ $dead[$i] = $Defender['u'.$i];
             }
         }
         
-        if($data['t11'] > 0){
-			if ($isoasis != 0) {
-				if ($database->canConquerOasis($data['from'],$data['to'])) {
-					$database->conquerOasis($data['from'],$data['to']);
-					$info_chief = $hero_pic." Your hero has conquered this oasis and gained ".$heroxp." XP";
-				} else {
-	                $OasisInfo = $database->getOasisInfo($data['to']);
-					if ($OasisInfo['conqured'] != 0) {
-			            $Oloyaltybefore =  $OasisInfo['loyalty'];
-				        $database->modifyOasisLoyalty($data['to']);
-			            $OasisInfo = $database->getOasisInfo($data['to']);
-				        $Oloyaltynow =  $OasisInfo['loyalty'];
-					    $info_chief = $hero_pic." Your hero has reduced oasis loyalty to ".$Oloyaltynow." from ".$Oloyaltybefore." and gained ".$heroxp." XP";
-					} else {
-						if ($heroxp == 0) {
-							$info_chief = $hero_pic." Your hero had nothing to kill therfore gains no XP at all";
-						} else {
-							$info_chief = $hero_pic." Your hero gained ".$heroxp." XP";
-						}
-					}
+####Hero claim artifact fixed by advocaite
+		if($data['t11'] > 0){
+            if ($isoasis != 0) {
+                if ($database->canConquerOasis($data['from'],$data['to'])) {
+                    $database->conquerOasis($data['from'],$data['to']);
+                    $info_chief = $hero_pic." Your hero has conquered this oasis and gained ".$heroxp." XP";
+                } else {
+                    $OasisInfo = $database->getOasisInfo($data['to']);
+                    if ($OasisInfo['conqured'] != 0) {
+                        $Oloyaltybefore =  $OasisInfo['loyalty'];
+                        $database->modifyOasisLoyalty($data['to']);
+                        $OasisInfo = $database->getOasisInfo($data['to']);
+                        $Oloyaltynow =  $OasisInfo['loyalty'];
+                        $info_chief = $hero_pic." Your hero has reduced oasis loyalty to ".$Oloyaltynow." from ".$Oloyaltybefore." and gained ".$heroxp." XP";
+                    } else {
+                        if ($heroxp == 0) {
+                            $info_chief = $hero_pic." Your hero had nothing to kill therfore gains no XP at all";
+                        } else {
+                            $info_chief = $hero_pic." Your hero gained ".$heroxp." XP";
+                        }
+                    }
                 }
-			}
-        }
+            } else {
+                        $artifact = $database->getOwnArtefactInfo($data['to']);
+                        if ($artifact['vref'] == $data['to']){
+                        if($database->canClaimArtifact($artifact['vref'],$artifact['size'])) {
+                         $database->claimArtefact($data['to'],$data['to'],$database->getVillageField($data['from'],"owner"));
+                          $info_chief = $hero_pic." Your hero is carrying home a artifact, and gained ".$heroxp." XP from the battle";  
+                        }else{
+                         $info_chief = $hero_pic." Your hero could not claim the artifact, and gained ".$heroxp." XP from the battle";  
+                           
+                        }
+                        }
+            }
+        }  
         
             
             

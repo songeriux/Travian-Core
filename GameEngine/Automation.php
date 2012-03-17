@@ -571,6 +571,7 @@ class Automation {
                                                 if(in_array($i,$spys)) {
                                                 $chiefs += $Attacker['u'.$i];
                                                 $spy_pic = $i;
+												$scout=true;
                                                 }
                                                 } 
                                                 $Attacker['uhero'] = $dataarray[0]['t11'];       
@@ -762,6 +763,7 @@ class Automation {
                                                 if(in_array($i,$spys)) {
                                                 $chiefs += $Attacker['u'.$i];
                                                 $spy_pic = $i;
+												$scout=true;
                                                 }
                                                 }        
                                                 $Attacker['uhero'] = $dataarray[0]['t11'];       

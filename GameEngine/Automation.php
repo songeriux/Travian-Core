@@ -1641,8 +1641,8 @@ $dead[$i] = $Defender['u'.$i];
             }
         }
         
-####Hero claim artifact fixed by advocaite
-		if($data['t11'] > 0){
+####Hero claim artifact created by advocaite, fixed by bp220269
+ if($data['t11'] > 0){
             if ($isoasis != 0) {
                 if ($database->canConquerOasis($data['from'],$data['to'])) {
                     $database->conquerOasis($data['from'],$data['to']);
@@ -1676,8 +1676,6 @@ $dead[$i] = $Defender['u'.$i];
                         }
             }
         }  
-        
-            
             
                 if($scout){
                 if ($data['spy'] == 1){

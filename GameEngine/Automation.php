@@ -106,50 +106,60 @@ class Automation {
         }
     return $popT;
     }
-    
-     public function Automation() {
-     
+    public function Automation() {
         $this->ClearUser();
         $this->ClearInactive();
         $this->pruneResource();
-        $this->loyaltyRegeneration();
-        $this->updateHero();
-        $this->celebrationComplete();
-        if(!file_exists("GameEngine/Prevention/culturepoints.txt") or time()-filemtime("GameEngine/Prevention/culturepoints.txt")>10) {
+        if(!file_exists("GameEngine/Prevention/culturepoints.txt") or time()-filemtime("GameEngine/Prevention/culturepoints.txt")>=60) {
             $this->culturePoints();
         }
-        if(!file_exists("GameEngine/Prevention/research.txt") or time()-filemtime("GameEngine/Prevention/research.txt")>10) {
+        if(!file_exists("GameEngine/Prevention/updatehero.txt") or time()-filemtime("GameEngine/Prevention/updatehero.txt")>=60) {
+	        $this->updateHero();
+		}
+        if(!file_exists("GameEngine/Prevention/research.txt") or time()-filemtime("GameEngine/Prevention/research.txt")>500) {
             $this->researchComplete();
         }
-        if(!file_exists("GameEngine/Prevention/cleardeleting.txt") or time()-filemtime("GameEngine/Prevention/cleardeleting.txt")>10) {
+        if(!file_exists("GameEngine/Prevention/cleardeleting.txt") or time()-filemtime("GameEngine/Prevention/cleardeleting.txt")>1800) {
             $this->clearDeleting();
         }
-        if(!file_exists("GameEngine/Prevention/build.txt") or time()-filemtime("GameEngine/Prevention/build.txt")>10) {
+        if(!file_exists("GameEngine/Prevention/build.txt") or time()-filemtime("GameEngine/Prevention/build.txt")>60) {
             $this->buildComplete();
         }
-        if(!file_exists("GameEngine/Prevention/market.txt") or time()-filemtime("GameEngine/Prevention/market.txt")>10) {
+        if(!file_exists("GameEngine/Prevention/market.txt") or time()-filemtime("GameEngine/Prevention/market.txt")>300) {
             $this->marketComplete();
         }
-        if(!file_exists("GameEngine/Prevention/training.txt") or time()-filemtime("GameEngine/Prevention/training.txt")>10) {
+        if(!file_exists("GameEngine/Prevention/training.txt") or time()-filemtime("GameEngine/Prevention/training.txt")>180) {
             $this->trainingComplete();
         }
-        if(!file_exists("GameEngine/Prevention/sendunits.txt") or time()-filemtime("GameEngine/Prevention/sendunits.txt")>10) {
+        if(!file_exists("GameEngine/Prevention/sendunits.txt") or time()-filemtime("GameEngine/Prevention/sendunits.txt")>240) {
             $this->sendunitsComplete();
         }
-        if(!file_exists("GameEngine/Prevention/sendreinfunits.txt") or time()-filemtime("GameEngine/Prevention/sendreinfunits.txt")>10) {
+          if(!file_exists("GameEngine/Prevention/loyalty.txt") or time()-filemtime("GameEngine/Prevention/loyalty.txt")>300) {
+	        $this->loyaltyRegeneration();
+		}
+        if(!file_exists("GameEngine/Prevention/sendreinfunits.txt") or time()-filemtime("GameEngine/Prevention/sendreinfunits.txt")>=121) {
             $this->sendreinfunitsComplete();
         }
-        if(!file_exists("GameEngine/Prevention/returnunits.txt") or time()-filemtime("GameEngine/Prevention/returnunits.txt")>10) {
+        if(!file_exists("GameEngine/Prevention/returnunits.txt") or time()-filemtime("GameEngine/Prevention/returnunits.txt")>=122) {
             $this->returnunitsComplete();
         }
-        if(!file_exists("GameEngine/Prevention/settlers.txt") or time()-filemtime("GameEngine/Prevention/settlers.txt")>10) {
+        if(!file_exists("GameEngine/Prevention/settlers.txt") or time()-filemtime("GameEngine/Prevention/settlers.txt")>400) {
             $this->sendSettlersComplete();
-        }    
-        if(!file_exists("GameEngine/Prevention/demolition.txt") or time()-filemtime("GameEngine/Prevention/demolition.txt")>10) {  
-            $this->demolitionComplete();    
         }
-    } 
-    
+         if(!file_exists("GameEngine/Prevention/starvation.txt") or time()-filemtime("GameEngine/Prevention/starvation.txt")>600) {
+	        $this->starvation();
+		}
+        if(!file_exists("GameEngine/Prevention/celebration.txt") or time()-filemtime("GameEngine/Prevention/celebration.txt")>=60) {
+            $this->celebrationComplete();
+        }
+        if(!file_exists("GameEngine/Prevention/demolition.txt") or time()-filemtime("GameEngine/Prevention/demolition.txt")>60) {
+            $this->demolitionComplete();
+        }
+        if(!file_exists("GameEngine/Prevention/healhero.txt") or time()-filemtime("GameEngine/Prevention/healhero.txt")>600) {
+            $this->healHero();
+        }
+    }
+
    private function getfieldDistance($coorx1, $coory1, $coorx2, $coory2) {
    $max = 2 * WORLD_MAX + 1;
    $x1 = intval($coorx1);
@@ -822,25 +832,15 @@ class Automation {
                 $unitssend_def[3] = ''.$Defender['u21'].','.$Defender['u22'].','.$Defender['u23'].','.$Defender['u24'].','.$Defender['u25'].','.$Defender['u26'].','.$Defender['u27'].','.$Defender['u28'].','.$Defender['u29'].','.$Defender['u30'].'';
                 $unitssend_def[4] = ''.$Defender['u31'].','.$Defender['u32'].','.$Defender['u33'].','.$Defender['u34'].','.$Defender['u35'].','.$Defender['u56'].','.$Defender['u37'].','.$Defender['u38'].','.$Defender['u39'].','.$Defender['u40'].'';
                 $unitssend_def[5] = ''.$Defender['u41'].','.$Defender['u42'].','.$Defender['u43'].','.$Defender['u44'].','.$Defender['u45'].','.$Defender['u46'].','.$Defender['u47'].','.$Defender['u48'].','.$Defender['u49'].','.$Defender['u50'].'';
-                $unitssend_deff[1] = '?,?,?,?,?,?,?,?,?,?,'; 
-                $unitssend_deff[2] = '?,?,?,?,?,?,?,?,?,?,'; 
-                $unitssend_deff[3] = '?,?,?,?,?,?,?,?,?,?,'; 
-                $unitssend_deff[4] = '?,?,?,?,?,?,?,?,?,?,'; 
-                $unitssend_deff[5] = '?,?,?,?,?,?,?,?,?,?,'; 
-              
-            //how many troops died? for battleraport
-            if($battlepart['casualties_attacker'][1] == 0) { $dead1 = 0; } else { $dead1 = $battlepart['casualties_attacker'][1]; }
-            if($battlepart['casualties_attacker'][2] == 0) { $dead2 = 0; } else { $dead2 = $battlepart['casualties_attacker'][2]; }
-            if($battlepart['casualties_attacker'][3] == 0) { $dead3 = 0; } else { $dead3 = $battlepart['casualties_attacker'][3]; }
-            if($battlepart['casualties_attacker'][4] == 0) { $dead4 = 0; } else { $dead4 = $battlepart['casualties_attacker'][4]; }
-            if($battlepart['casualties_attacker'][5] == 0) { $dead5 = 0; } else { $dead5 = $battlepart['casualties_attacker'][5]; }
-            if($battlepart['casualties_attacker'][6] == 0) { $dead6 = 0; } else { $dead6 = $battlepart['casualties_attacker'][6]; }
-            if($battlepart['casualties_attacker'][7] == 0) { $dead7 = 0; } else { $dead7 = $battlepart['casualties_attacker'][7]; }
-            if($battlepart['casualties_attacker'][8] == 0) { $dead8 = 0; } else { $dead8 = $battlepart['casualties_attacker'][8]; }
-            if($battlepart['casualties_attacker'][9] == 0) { $dead9 = 0; } else { $dead9 = $battlepart['casualties_attacker'][9]; }
-            if($battlepart['casualties_attacker'][10] == 0) { $dead10 = 0; } else { $dead10 = $battlepart['casualties_attacker'][10]; }
-
-            
+for($i=1;$i<=5;$i++){
+$unitssend_deff[$i]="?,?,?,?,?,?,?,?,?,?,";
+}
+# How many troops died? For BATTLERAPORT
+for($i=1;$i<=10;$i++){
+if($battlepart['casualties_attacker'][$i] <= 0) { ${dead.$i} = 0; }elseif($battlepart['casualties_attacker'][$i] > $data['t'.$i]){
+${dead.$i}=$data['t'.$i];
+}else { ${dead.$i} = $battlepart['casualties_attacker'][$i]; }
+}            
                     //kill own defence
                     $q = "SELECT * FROM ".TB_PREFIX."units WHERE vref='".$data['to']."'";
                     $unitlist = $database->query_return($q); 
@@ -853,8 +853,13 @@ class Automation {
                                     $dead[$i]+=round($battlepart[2]*$unitlist[0]['u'.$i]);
                                     $database->modifyUnit($data['to'],$i,round($battlepart[2]*$unitlist[0]['u'.$i]),0);
                                 }
-                            }
-            //kill other defence in village
+                           }
+for($i=$start;$i<=$end;$i++){
+if($dead[$i] > $Defender['u'.$i]){
+$dead[$i] = $Defender['u'.$i];
+}
+}
+						   //kill other defence in village
             if(count($database->getEnforceVillage($data['to'],0)) > 0) {
                 foreach($database->getEnforceVillage($data['to'],0) as $enforce) {
                     $life='';    $notlife=''; $wrong='0';

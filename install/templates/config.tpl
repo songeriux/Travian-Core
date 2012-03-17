@@ -110,7 +110,6 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	<td><span class="f9 c6">Prefix:</span></td><td><input type="text" name="prefix" id="prefix" value="s1_" size="5"></td></tr>
 	<td><span class="f9 c6">Type:</span></td><td><select name="connectt">
 	  <option value="0" selected="selected">MYSQL</option>
-	  <option value="1" disabled="disabled">MYSQLi</option>
 	</select></td></tr>
 	</table>
 	</p>
@@ -136,7 +135,7 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	  <option value="true" disabled="disabled">Yes</option></select></span><br /><br />
 	<span class="f9 c6 c2">GPack Design:</span><span class="c3"><select name="gp_locate">
 	  <option value="gpack/travian_default/" selected="selected">Travian Default
-	  <option value="gpack/travianx_v1/">TravianX v1 by Dzoki</option></select></span><br /><br />
+	  <option value="gpack/travianx_v1/">Travian Core by Songer</option></select></span><br /><br />
 	
 -->
 <!-- </RIGHT BOX - GPACK RELATED> -->
@@ -161,7 +160,7 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	</p>
 	
 	<p>
-	<span class="f10 c">LOG RELATED</span>
+	<span class="f10 c">LOG RELATED (You should disable them)</span>
 	<table><tr>
 	<td><span class="f9 c6">Log Building:</span></td><td><select name="log_build">
 	  <option value="true" selected="selected">Yes</option>
@@ -214,7 +213,7 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	  <option value="true" selected="selected">Yes</option>
 	  <option value="false">No</option>
 	</select></td></tr><tr>
-	<td><span class="f9 c6">Limit Mailbox:</span></td><td><select name="limit_mailbox">
+	<td><span class="f9 c6">Limit Mailbox (Doesn't work):</span></td><td><select name="limit_mailbox">
 	  <option value="true" selected="selected">Yes</option>
 	  <option value="false">No</option>
 	</select></td></tr>

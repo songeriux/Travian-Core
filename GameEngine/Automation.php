@@ -849,8 +849,8 @@ ${dead.$i}=$data['t'.$i];
                                 }
                            }
 for($i=$start;$i<=$end;$i++){
-if($dead[$i] > $Defender['u'.$i]){
-$dead[$i] = $Defender['u'.$i];
+if($dead[$i] > $Defender[$i]){
+$dead[$i] = $Defender[$i];
 }
 }
 						   //kill other defence in village
